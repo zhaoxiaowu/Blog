@@ -1,8 +1,8 @@
-![logo](imgs/head.jpg)
+![logo](./images/head.jpg)
 
 # zhaoxiaowu
 
-> 赵小吴的个人博客。
+> 赵小吴的技术博客。
 
-[GitHub](https://zhaoxiaowu.github.io/)
+[GitHub](https://github.com/zhaoxiaowu/blog)
 [Get Started](README.md)
