@@ -5,4 +5,4 @@
 > 赵小吴的技术博客。
 
 [GitHub](https://github.com/zhaoxiaowu/blog)
-[Get Started](README.md)
+[Get Started](design/设计模式.md)
