@@ -1,0 +1,11 @@
+https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-s-7/
+
+树状数组
+
+
+https://mp.weixin.qq.com/s/Ef73zZv6wiaXwiJRnCLpoQ
+
+
+跳跃表  小顶锥
+
+STM   KLP

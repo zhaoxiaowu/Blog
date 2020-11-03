@@ -1,0 +1,65 @@
+读写分离
+
+锁
+
+
+心跳
+
+
+序列
+
+
+
+nio
+
+布隆过滤器 
+
+缓存击穿  缓存雪崩
+
+哨兵模式  集群模式
+
+雪花算法
+
+同步信号、锁、阻塞集合
+
+concurrenthashmap源码
+
+同步锁 偏向锁  分段锁
+
+TreeMap
+
+
+主要代表为CountDownLatch Semaphore  CyclicBarrier
+
+synch  1.8优化
+
+偏向锁
+
+CopyOnWrite
+
+
+数据库已经有锁了     什么时候需要程序中加锁？
+
+多线程写同一个文件  是操作系统支持  还是需要应用程序加锁实现
+
+
+锁
+（悲观锁  乐观锁   互斥锁  读写锁 自旋锁  公平锁 非公平锁）
+Wait  Signal
+Condition
+
+重排序
+
+
+concurrenthashmap
+
+
+LSM
+
+线程切换开销大
+
+分区
+
+B+   B-
+
+volitile  怎么防止指令重排
