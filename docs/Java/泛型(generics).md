@@ -52,7 +52,7 @@ public static void main(String[] args) {
 class Dog extends Animal {
 
 }
-复制代码
+ 
 ```
 
 dst 类型 “大于等于” src 的类型，这里的“大于等于”是指 dst 表示的范围比 src 要大，因此装得下 dst 的容器也就能装 src 。
@@ -75,7 +75,7 @@ T t = operate();
 
 // 不可以
 ？ car = operate();
-复制代码
+ 
 ```
 
 **简单总结下：**
@@ -116,7 +116,7 @@ test(List<? extends Number> dest, List<? extends Number> src)
 
 ```
 T extends A
-复制代码
+ 
 ```
 
 但是通配符 ? 可以进行 两种限定：
@@ -138,7 +138,7 @@ T extends A
 // 对象，这里比较明显的是，我们需要使用强制类型转换
 MultiLimit multiLimit = (MultiLimit)
 Class.forName("com.glmapper.bridge.boot.generic.MultiLimit").newInstance();
-复制代码
+ 
 ```
 
 对于上述代码，在运行期，如果反射的类型不是 MultiLimit 类，那么一定会报 java.lang.ClassCastException 错误。

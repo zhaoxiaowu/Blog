@@ -262,7 +262,6 @@ CurrentHashMap的初始化一共有三个参数:
         h += (h <<   2) + (h << 14);
         return h ^ (h >>> 16);
     }
-复制代码
 ```
 
 ### 初始化Segment
@@ -299,7 +298,6 @@ private Segment<K,V> ensureSegment(int k) {
     }
     return seg;
 }
-复制代码
 ```
 
 ### put过程分析
@@ -319,7 +317,7 @@ put 方法的总体流程是，
 1. 线程A执行tryLock()方法成功获取锁，则把HashEntry对象插入到相应的位置；
 2. 线程B获取锁失败，则执行scanAndLockForPut()方法，在scanAndLockForPut方法中，会通过重复执行tryLock()方法尝试获取锁，在多处理器环境下，重复次数为64，单处理器重复次数为1，当执行tryLock()方法的次数超过上限时，则执行lock()方法挂起线程B；
 3. 当线程A执行完插入操作时，会通过unlock()方法释放锁，接着唤醒线程B继续执行；
-复制代码
+ 
 ```
 
 put 方法的过程:
@@ -425,7 +423,6 @@ final V put(K key, int hash, V value, boolean onlyIfAbsent) {
     }
     return oldValue;
 }
-复制代码
 ```
 
 ### get()方法
@@ -454,7 +451,6 @@ public V get(Object key) {
     }
     return null;
 }
-复制代码
 ```
 
 ### remove操作
@@ -495,24 +491,15 @@ final V remove(Object key, int hash, Object value) {
     }
     return oldValue;
 }
-复制代码
 ```
 
 首先remove操作也是确定需要删除的元素的位置，不过这里删除元素的方法不是简单地把待删除元素的前面的一个元素的next指向后面一个就完事了，前面已经说过HashEntry中的next是final的，一经赋值以后就不可修改，在定位到待删除元素的位置以后，程序就将待删除元素前面的那一些元素全部复制一遍，然后再一个一个重新接到链表上去，看一下下面这一幅图来了解这个过程：
 
-
-
-![img](https://user-gold-cdn.xitu.io/2019/9/26/16d6e14148a0a5c8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-
+![image-20201108210008547](../images/image-20201108210008547.png)
 
 假设链表中原来的元素如上图所示，现在要删除元素3，那么删除元素3以后的链表就如下图所示：
 
-
-
-![img](https://user-gold-cdn.xitu.io/2019/9/26/16d6e146a45cf8b4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-
+![image-20201108210016985](../images/image-20201108210016985.png)
 
 注意：图1和2的元素顺序相反了，为什么这样，不防再仔细看看源码或者再读一遍上面remove的分析过程，元素复制是从待删除元素位置起将前面的元素逐一复制的，然后再将后面的链接起来。
 

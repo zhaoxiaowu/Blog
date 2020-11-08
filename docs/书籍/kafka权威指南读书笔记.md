@@ -154,7 +154,7 @@ kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSer
 kafkaProps.put("value.seializer","org.apache.kafka.common.serialization.StringSerializer");
  
 producer = new KafkaProducer<String, String>(kafkaProps);
-复制代码
+ 
 ```
 
 Kafka生产者有 3个必选的属性
@@ -194,7 +194,7 @@ try{
 } catch(Exception e) {
   e.printStack();
 }
-复制代码
+ 
 ```
 
 生产者的 send() 方住将 ProducerRecord对象作为参数，它需要目标主题的名字和要发送的键和值对象，它们都是字符串。键和值对象的类型必须与序列化器和生产者对象相匹配。
@@ -212,7 +212,7 @@ try{
 } catch(Exception e) {
     e.printStack();
 }
-复制代码
+ 
 ```
 
 在这里， producer.send() 方住先返回一个 Future对象，然后调用 Future对象的 get() 方法等待 Kafka 响应。如果服务器返回错误， get()方怯会抛出异常。如果没有发生错误，我们会得到一个 RecordMetadata对象，可以用它获取消息的偏移量。如果在发送数据之前或者在发送过程中发生了任何错误 ，比如 broker返回 了一个不允许重发消息的异常或者已经超过了重发的次数 ，那么就会抛出异常。我们只是简单地把异常信息打印出来。
@@ -397,7 +397,7 @@ props.put("key.deserializer", "org.apache.kafka.common.serializaiton.StrignDeser
 props.put("value.deserializer", "org.apache.kafka.common.serializaiton.StrignDeserializer");
  
 KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
-复制代码
+ 
 ```
 
 deserializer使用指定的类(反序列化器)把字节数组转成 Java对象。
@@ -410,7 +410,7 @@ group.id指定了KafkaConsumer 属于哪一个消费者群组。 group.id不是�
 
 ```
 consumer.subscribe(Collections.singletonList("customerCountries"));
-复制代码
+ 
 ```
 
 在这里我们创建了一个包含单个元素的列表，主题的名字叫作“customerCountries”，我们也可以在调用subscribe()方法时传入一个正则表达式，正则表达式可以匹配多个主题如果有人创建了新的主题，并且主题名与正则表达式匹配，那么会立即触发一次再均衡，消费者就可以读取新添加的主题。如果应用程序需要读取多个主题，并且可以处理不同类型的数据，那么这种订阅方式就很管用。在Kafka和其他系统之间复制数据时，使用正则表达式的方式订阅多个主题时很常见的做法。

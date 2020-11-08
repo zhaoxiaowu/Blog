@@ -2,7 +2,7 @@
 
 ## 继承结构
 
-![image-20200827103550217](C:\Users\pc-hone\images\image-20200827103550217.png)
+![image-20200827103550217](..\images\image-20200827103550217.png)
 
 ## Deque
 
@@ -26,7 +26,6 @@ public interface List<E> extends Collection<E> {
     E get(int index);
 	...
 }
-复制代码
 ```
 
 ## LinkedList
@@ -40,7 +39,6 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>,
     transient Node<E> last;
 	...
 }
-复制代码
 ```
 
 - size：数组元素个数
@@ -59,7 +57,6 @@ LinkedList的成员变量很少，就上面那3个，其中first和last都是Nod
 ```
 public LinkedList() {
 }
-复制代码
 ```
 
 LinkedList的构造函数有2个，以平时最常用的构造函数为例，发现该构造函数什么事都没做。
@@ -78,7 +75,6 @@ private static class Node<E> {
         this.prev = prev;
     }
 }
-复制代码
 ```
 
 再来看看这个节点类型的类结构，它描述了一个带有两个箭头的数据节点，也就是说LinkedList是双向链表。
@@ -107,7 +103,6 @@ void linkLast(E e) {
     size++;
     modCount++;
 }
-复制代码
 ```
 
 因为LinkedList是链表结构，所以每添加一个元素就是让这个元素链接到链表的尾部。
@@ -133,7 +128,6 @@ public void add(int index, E element) {
     else
         linkBefore(element, node(index));
 }
-复制代码
 ```
 
 该add方法将添加集合元素分为2种情况，一种是在集合尾部添加，另一种是在集合中间或头部添加，因为第一种情况也是调用linkLast()方法，这里不再啰嗦，我们看看第二种情况，分析linkBefore(E e, Node succ)这个方法是怎么对元素进行添加操作的。
@@ -151,7 +145,6 @@ void linkBefore(E e, Node<E> succ) {
     size++;
     modCount++;
 }
-复制代码
 ```
 
 往LinkedList集合中间或头部添加元素分为以下几个步骤：
@@ -186,7 +179,6 @@ Node<E> node(int index) {
         return x;
     }
 }
-复制代码
 ```
 
   细看node(int index)方法中的代码逻辑，可以看到，它是通过遍历的方式，将集合中的元素一个个拿出来，再通过该元素的prev或next拿到下一个遍历的元素，经过index次循环后，最终才拿到了index对应的元素。
@@ -227,30 +219,29 @@ E unlink(Node<E> x) {
     modCount++;
     return element;
 }
-复制代码
 ```
 
 在remove(int index)这个方法中，先通过index和node(int index)拿到了要被删除的元素x，然后调用了unlink(Node x)方法将其删除，自然，LinkedList删除元素的核心方法就是unlink(Node x)，删除操作分以下几个步骤：
 
 1. 通过要删除的元素x拿到它的前驱节点prev和后继节点next。
 
-   ![img](https://user-gold-cdn.xitu.io/2017/11/8/2bea4c0c2d8079c8ddf64fe14fcd021f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+   ![image-20201108205358898](../images/image-20201108205358898.png)
 
 2. 若前驱节点prev为null，说明x是集合中的首个元素，直接将first指向后继节点next即可；
 
-   ![img](https://user-gold-cdn.xitu.io/2017/11/8/32182481a6c309a942555fb97ca3acfb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+   ![image-20201108205413520](../images/image-20201108205413520.png)
 
    若不为null，则让前驱节点prev的next指向后继节点next，再将x的prev置空。（这时prev与x的关联就解除了，并与next建立了联系）。
 
-   ![img](https://user-gold-cdn.xitu.io/2017/11/8/d74c5481715b0cf728a81ddafecca4d7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+   ![image-20201108205430993](../images/image-20201108205430993.png)
 
 3. 若后继节点next为null，说明x是集合中的最后一个元素，直接将last指向前驱节点prev即可；（下图分别对应步骤2中的两种情况）
 
-   ![img](https://user-gold-cdn.xitu.io/2017/11/8/88ff79073ef7fdf88f4bc936307f1430?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+   ![image-20201108205438513](../images/image-20201108205438513.png)
 
    若不为null，则让后继节点next的prev指向前驱节点prev，再将x的next置空。（这时next与x的关联就解除了，并与prev建立了联系）。
 
-   ![img](https://user-gold-cdn.xitu.io/2017/11/8/07dc7fbc6057897c2fa6c60cb4c88a2c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+   ![image-20201108205445569](../images/image-20201108205445569.png)
 
 4. 最后，让记录集合长度的size减1。
 
@@ -275,7 +266,7 @@ public boolean remove(Object o) {
     }
     return false;
 }
-复制代码
+ 
 ```
 
 remove(Object o)这个删除元素的方法的形参o是数据本身，而不是LinkedList集合中的元素（节点），所以需要先通过节点遍历的方式，找到o数据对应的元素，然后再调用unlink(Node x)方法将其删除，关于unlink(Node x)的分析在第一个删除方法中已经提到了，可往回再看看。
@@ -294,7 +285,7 @@ public E set(int index, E element) {
     x.item = element;
     return oldVal;
 }
-复制代码
+ 
 ```
 
 #### 2）get(int index)
@@ -304,7 +295,7 @@ public E get(int index) {
     checkElementIndex(index);
     return node(index).item;
 }
-复制代码
+ 
 ```
 
 # 三、队列Queue
@@ -315,14 +306,14 @@ public E get(int index) {
 public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>, Deque<E>, Cloneable, java.io.Serializable {
 	...
 }
-复制代码
+ 
 ```
 
 代码中的Deque是Queue的一个子接口，它继承了Queue：
 
 ```
 public interface Deque<E> extends Queue<E> {...}
-复制代码
+ 
 ```
 
 从这两者的关系，不难得出，队列的实现方式也是链表。下面先来看看Queue的接口声明：
@@ -338,7 +329,7 @@ public interface Queue<E> extends Collection<E> {
 	E peek();
 	...
 }
-复制代码
+ 
 ```
 
 - offer()：添加队尾元素
@@ -355,7 +346,7 @@ public interface Queue<E> extends Collection<E> {
 public boolean offer(E e) {
     return add(e);
 }
-复制代码
+ 
 ```
 
 可以看到，在LinkedList中，队列的offer(E e)方法实际上是调用了LinkedList的add(E e)，add(E e)已经在最前面分析过了，就是在链表的尾部添加一个元素~
@@ -383,7 +374,7 @@ private E unlinkFirst(Node<E> f) {
     modCount++;
     return element;
 }
-复制代码
+ 
 ```
 
 poll()方法先拿到队头元素 f ，若 f 不为null，就调用unlinkFirst(Node f)其删除。unlinkFirst(Node f)在实现上跟unlink(Node x)差不多且相对简单，这里不做过多说明。
@@ -395,7 +386,7 @@ public E peek() {
     final Node<E> f = first;
     return (f == null) ? null : f.item;
 }
-复制代码
+ 
 ```
 
 peek()先通过first拿到队头元素，然后取出元素中的数据实体返回而已。
@@ -449,7 +440,7 @@ ArrayDeque 用一个动态数组实现了栈和队列所需的所有操作。
         elements = a;
         head = 0;
         tail = n;
-    }复制代码
+    } 
 ```
 
 这里可以看到，无论是头部还是尾部添加新元素，当需要扩容时，会直接变化为原来的2倍。同时需要复制并移动大量的元素。
@@ -480,7 +471,7 @@ public E pollFirst() {
             tail = t;
         }
         return result;
-    }复制代码
+    } 
 ```
 
 从头部和尾部删除（获取）元素，就比较方便了，修改head和tail位置即可。head是当前数组中第一个元素的位置，tail是数组中第一个空的位置。
@@ -495,7 +486,7 @@ public E pollFirst() {
  * /
 
 public interface BlockingDeque<E> extends BlockingQueue<E>, Deque<E> {
-}复制代码
+} 
 ```
 
 关于Deque最后一点，BlockingDeque 在Deque 基础上又实现了**阻塞**的功能，当栈或队列为空时，不允许出栈或出队列，会保持阻塞，直到有可出栈元素出现；同理，队列满时，不允许入队，除非有元素出栈腾出了空间。常用的具体实现类是LinkedBlockingDeque，使用链式结构实现了他的阻塞功能。Android中大家非常熟悉的AsyncTask 内部的线程池队列，就是使用LinkedBlockingDeque实现，长度为128，保证了AsyncTask的串行执行。

@@ -23,7 +23,7 @@
 当有一组feature开发完成，首先会合并到develop分支，进入提测时，会创建release分支。
 如果测试过程中若存在bug需要修复，则直接由开发者在release分支修复并提交。
 当测试完成之后，合并release分支到master和develop分支，此时master为最新代码，用作上线。
-复制代码
+ 
 ```
 
 **hotfix 分支**
@@ -41,7 +41,7 @@
 (feature/xxx)$: git add xxx
 (feature/xxx)$: git commit -m 'commit comment'
 (dev)$: git merge feature/xxx --no-ff          # 把特性分支合并到dev
-复制代码
+ 
 ```
 
 **修复紧急bug**
@@ -53,14 +53,14 @@
 (hotfix/xxx)$: git commit -m 'commit comment'
 (master)$: git merge hotfix/xxx --no-ff       # 把hotfix分支合并到master，并上线到生产环境
 (dev)$: git merge hotfix/xxx --no-ff          # 把hotfix分支合并到dev，同步代码
-复制代码
+ 
 ```
 
 **测试环境代码**
 
 ```
 (release)$: git merge dev --no-ff             # 把dev分支合并到release，然后在测试环境拉取并测试
-复制代码
+ 
 ```
 
 **生产环境上线**
@@ -68,7 +68,7 @@
 ```
 (master)$: git merge release --no-ff          # 把release测试好的代码合并到master，运维人员操作
 (master)$: git tag -a v0.1 -m '部署包版本名'  #给版本命名，打Tag
-复制代码
+ 
 ```
 
 
@@ -105,7 +105,7 @@
 <body>
 <BLANK LINE>
 <footer>
-复制代码
+ 
 ```
 
 - type: 本次 commit 的类型，诸如 bugfix docs style 等
@@ -137,7 +137,7 @@
 # * 是否存在副作用、风险? 
 #
 # 如果需要的化可以添加一个链接到issue地址或者其它文档
-复制代码
+ 
 ```
 
 ## 参考链接

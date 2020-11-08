@@ -28,7 +28,7 @@ C:\Users> java -version
 java version "1.8.0_171"   # 如果是openJDK, 则这里会显示：openjdk version
 Java(TM) SE Runtime Environment (build 1.8.0_171-b11)
 Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode) # 使用的是HotSpot虚拟机，默认为服务端模式
-复制代码
+ 
 ```
 
 ## 二、Java 内存区域
@@ -149,7 +149,7 @@ objB.instance = objA
 objA = null;
 objB = null;
 System.gc();
-复制代码
+ 
 ```
 
 如上所示，此时两个对象已经不能再被访问，但其互相持有对对方的引用，如果采用引用计数法，则两个对象都无法被回收。
@@ -557,7 +557,7 @@ public static String concat(String... strings) {
     }
     return sb.toString(); // 没有发生方法逃逸
 }
-复制代码
+ 
 ```
 
 如果能证明一个对象不会逃逸到方法或线程之外，或者逃逸程度比较低（只逃逸出方法而不会逃逸出线程），则可以为这个对象实例采取不同程序的优化：

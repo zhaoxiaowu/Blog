@@ -26,7 +26,6 @@ public void write() {
    // 对ArrayList写
    lock.writeLock().unlock();
 }
-复制代码
 ```
 
 大家想想，类似上面的代码有什么问题呢？
@@ -106,7 +105,6 @@ public void write() {
           lock.unlock();
       }
   }
-复制代码
 ```
 
 然后大家想，因为是通过副本来进行更新的，万一要是多个线程都要同时更新呢？那搞出来多个副本会不会有问题？
@@ -139,7 +137,6 @@ public void write() {
 private final ConcurrentMap<topicpartition, deque<="" span="">
 
          batches = new CopyOnWriteMap<TopicPartition, Deque>();
-复制代码
 ```
 
 这个数据结构就是核心的用来存放写入内存缓冲中的消息的数据结构，要看懂这个数据结构需要对很多Kafka内核源码里的概念进行解释，这里先不展开。
@@ -169,7 +166,6 @@ private final ConcurrentMap<topicpartition, deque<="" span="">
       return map.get(k);
 
   }
-复制代码
 ```
 
 所以Kafka这个核心数据结构在这里之所以采用CopyOnWriteMap思想来实现，就是因为这个Map的key-value对，其实没那么频繁更新。

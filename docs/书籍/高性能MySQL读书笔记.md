@@ -424,7 +424,7 @@ CREATE TABLE `mytest`.`student`  (
   `year` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'year',
   INDEX `demo`(`age`, `name`, `year`) USING BTREE COMMENT 'demo'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-复制代码
+ 
 ```
 
 故意使用不按索引顺序查询：
@@ -432,7 +432,7 @@ CREATE TABLE `mytest`.`student`  (
 ```
 mysql> explain extended  SELECT * FROM `student` where `name` = 1 and `age` = 1;
 实际: key:demo 使用到了索引
-复制代码
+ 
 ```
 
 `如何查看Mysql优化之后的SQL`：
@@ -446,7 +446,7 @@ show warnings;
 
 # 结果如下：
 /* select#1 */ select `mytest`.`student`.`age` AS `age`,`mytest`.`student`.`name` AS `name`,`mytest`.`student`.`year` AS `year` from `mytest`.`student` where ((`mytest`.`student`.`age` = 1) and (`mytest`.`student`.`name` = 1))
-复制代码
+ 
 ```
 
 可以发现真正执行的SQL是 age在前，name在后

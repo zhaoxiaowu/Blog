@@ -23,7 +23,6 @@ public interface List<E> extends Collection<E> {
     E get(int index);
 	...
 }
-复制代码
 ```
 
 在List这个接口中，提供了对集合进行操作的增、删、改、查方法，我们知道，ArrayList和LinkedList都实现了List接口，但它们的底层实现分别是线性表与链表，所以，对应的增、删、改、查方法肯定也不一样，下面的分析也将从这几个方法入手。
@@ -44,7 +43,6 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAcce
     private int size;
 	...
 }
-复制代码
 ```
 
 - DEFAULT_CAPACITY：默认的数组长度
@@ -61,7 +59,6 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAcce
 public ArrayList() {
     this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
 }
-复制代码
 ```
 
 这个构造函数是开发最常用的，可以看到，它仅仅只是让elementData等于一个空数组（DEFAULTCAPACITY_EMPTY_ELEMENTDATA）而已。
@@ -77,7 +74,6 @@ public ArrayList(int initialCapacity) {
                                            initialCapacity);
     }
 }
-复制代码
 ```
 
 这个构造函数可以指定初始化数组的长度，当initialCapacity大于0时，为elementData创建一个长度为initialCapacity的Object数组；当initialCapacity等于0时，则让elementData等于一个空数组（EMPTY_ELEMENTDATA）。
@@ -92,7 +88,6 @@ public boolean add(E e) {
     elementData[size++] = e;
     return true;
 }
-复制代码
 ```
 
 在前面已经提到了，size是一个成员变量，表示ArrayList中的元素个数。在这个方法中，先调用了ensureCapacityInternal()方法确保数组有足够的容量，再对将元素添加到elementData数组中。下面就来看看ensureCapacityInternal()方法是如何确保数组有足够的容量的。
@@ -105,7 +100,6 @@ private void ensureCapacityInternal(int minCapacity) {
 
     ensureExplicitCapacity(minCapacity);
 }
-复制代码
 ```
 
 该方法结合ensureExplicitCapacity()方法，总的来说就是计算并扩大最小的容器体积。
@@ -120,7 +114,6 @@ private void ensureExplicitCapacity(int minCapacity) {
     if (minCapacity - elementData.length > 0)
         grow(minCapacity);
 }
-复制代码
 ```
 
 当minCapacity - elementData.length > 0时，说明当前数组（容器）的空间不够了，需要扩容，所以调用grow()方法。
@@ -139,7 +132,6 @@ private void grow(int minCapacity) {
     // minCapacity is usually close to size, so this is a win:
     elementData = Arrays.copyOf(elementData, newCapacity);
 }
-复制代码
 ```
 
 grow()方法是用来给ArrayList集合进行扩容的，它计算出新的容器大小（即newCapacity），并确保了newCapacity不会比minCapacity小，最后调用Arrays.copyOf()创建一个新的数组并将数据拷贝到新数组中，最后让elementData进行引用。
@@ -158,7 +150,6 @@ public void add(int index, E element) {
     elementData[index] = element;
     size++;
 }
-复制代码
 ```
 
 经过对add(E e)方法进行分析，这个增加方法就很容易理解了，它先确保容器有足够大的空间，没有就扩容，然后将elementData数组中从index位置开始的所有元素往后"移动"1位，再对数组的index位置进行元素赋值，最后将记录集合中元素个数的size变量加1。
@@ -182,7 +173,6 @@ public E remove(int index) {
 
     return oldValue;
 }
-复制代码
 ```
 
 numMoved表示在执行删除操作时数组需要移动的元素个数，将elementData数组中从index后一位开始的所有元素（即numMoved个元素）往前"移动"1位（这样一移动，index位置的元素会被后面的元素覆盖，间接起到了删除元素的作用），然后把最后的那个元素置空，同时将size变量减1。
@@ -214,7 +204,6 @@ private void fastRemove(int index) {
                          numMoved);
     elementData[--size] = null; // clear to let GC do its work
 }
-复制代码
 ```
 
 该方法的操作与remove(int index)基本一致，这里就不再说明了。（fastRemove()方法的代码不是可以复用么。。。）
@@ -234,7 +223,6 @@ public E get(int index) {
 E elementData(int index) {
     return (E) elementData[index];
 }
-复制代码
 ```
 
 #### 2）set(int index, E element)
@@ -247,7 +235,6 @@ public E set(int index, E element) {
     elementData[index] = element;
     return oldValue;
 }
-复制代码
 ```
 
 # 三、总结

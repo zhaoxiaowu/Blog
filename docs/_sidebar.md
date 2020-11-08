@@ -1,3 +1,5 @@
+* [剑指Offer经典算法](书籍/剑指Offer.md)
+* [设计模式](设计模式/设计模式.md)
 * 算法
     * [LeetCode经典题解](算法/LeetCode经典题解.md)
     * [十大经典排序算法](算法/十大经典排序算法.md)
@@ -14,8 +16,6 @@
     * [LinkedHashMap源码解读](源码/LinkedHashMap源码解读.md)
     * [LinkedList源码&Deque](源码/LinkedList源码&Deque.md)
     * [TreeMap底层源码实现](源码/TreeMap底层源码实现.md)
-* [剑指Offer经典算法](书籍/剑指Offer.md)
-* [设计模式](设计模式/设计模式.md)
 * [Netty仿写微信即时通讯系统](书籍/Netty仿写微信即时通讯系统.md)
 * [高性能MySQL](书籍/高性能MySQL读书笔记.md)
 * [码出高效](书籍/码出高效读书笔记.md)

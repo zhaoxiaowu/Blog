@@ -56,7 +56,6 @@ TreeMap底层是红黑树，在java8 HashMap也引入了红黑树，那么什么
 
         public String toString() {...}
     }
-复制代码
 ```
 
 ### 构造方法
@@ -96,7 +95,6 @@ TreeMap底层是红黑树，在java8 HashMap也引入了红黑树，那么什么
         } catch (ClassNotFoundException cannotHappen) {
         }
     }
-复制代码
 ```
 
 ### put方法
@@ -167,7 +165,6 @@ TreeMap底层是红黑树，在java8 HashMap也引入了红黑树，那么什么
         modCount++;
         return null;
     } 
-复制代码
 ```
 
 ### get方法
@@ -224,7 +221,6 @@ get方法与put思路大致相同
         }
         return null;
     }
-复制代码
 ```
 
 ### containsValue方法
@@ -274,7 +270,6 @@ get方法与put思路大致相同
             return p;
         }
     }
-复制代码
 ```
 
 successor方法找节点的后继节点:
@@ -284,16 +279,14 @@ successor方法找节点的后继节点:
 
 第一个无需多言，第二个也容易，看图p的后继节点s:
 
-![img](https://user-gold-cdn.xitu.io/2018/5/4/163293b69052b93b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![image-20201108204547372](../images/image-20201108204547372.png)
 
 第三个:
  若其父节点为空，返回null;
  若其有父节点且为父节点左子树，返回其父节点;
  若其有父节点且为父节点右子树，其所在左子树的第一个祖先节点看图(p的后继为s)，一个个往上找将p与A看成整体相对于B是其右子树，再往上找将P、B、A看成整体相对于C还是其右子树，再找P、B、A、C整体相对于S是其左子树，返回这个整体的第一个祖先节点即节点S
 
-![img](https://user-gold-cdn.xitu.io/2018/5/4/1632948cf504e6a2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-
+![image-20201108204603210](../images/image-20201108204603210.png)
 
 ### remove方法
 
@@ -359,7 +352,6 @@ successor方法找节点的后继节点:
             }
         }
     }
-复制代码
 ```
 
 分三种情况:
@@ -367,9 +359,7 @@ successor方法找节点的后继节点:
 
 删除节点A:
 
-
-
-![img](https://user-gold-cdn.xitu.io/2018/5/4/16329bbf55d35608?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![image-20201108204617597](../images/image-20201108204617597.png)
 
 ②.一个孩子:用子节点替代需删除节点
 
@@ -377,9 +367,7 @@ successor方法找节点的后继节点:
 
 删除节点G:
 
-
-
-![img](https://user-gold-cdn.xitu.io/2018/5/4/16329d9c5c9a83b7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![image-20201108204631493](../images/image-20201108204631493.png)
 
 
 
@@ -387,9 +375,7 @@ successor方法找节点的后继节点:
 
 删除节点B:
 
-
-
-![img](https://user-gold-cdn.xitu.io/2018/5/4/16329d5ba08493bc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![image-20201108204641460](../images/image-20201108204641460.png)
 
 
 
