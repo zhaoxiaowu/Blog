@@ -36,12 +36,4 @@
 * [技术书籍](书籍/技术书籍.md)
 
 # 最佳阅读地址
-https://zhaoxiaowu.github.io/blog
-
-# doscify：
-
-Quick start：npm i docsify-cli -g
-
-Initialize：docsify init ./docs
-
-Preview your site：docsify serve docs
+https://blog.zhaoxiaowu.vercel.app/#/
